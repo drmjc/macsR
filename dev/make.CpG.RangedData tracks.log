@@ -1,0 +1,82 @@
+# 2012-03-05
+# GOAL: convert the CpG island track(s) from UCSC into BED format, then into
+# RangedData format, so that they will play nicely with ChIPpeakAnno, and other
+# data.
+# 
+
+# 0) can we get CpG islands from BioMart??? 
+# ...not that i'm aware of...
+# mart = useMart(biomart="ensembl", dataset="hsapiens_gene_ensembl")
+# Annotation = getAnnotation(mart, featureType="CpG")
+# as.data.frame(Annotation)[1:10,]
+
+#
+# 1) download the tracks from the UCSC table browser. select all columns.
+# 
+setwd("~/src/R/macsR/dev")
+dir("UCSC")
+# [1] "hg17.cpgIslandExt" "hg18.cpgIslandExt" "hg19.cpgIslandExt"
+# [4] "mm8.cpgIslandExt"  "mm9.cpgIslandExt"  "rn4.cpgIslandExt" 
+
+#' import a UCSC CpG island track & convert to BED format.
+#'
+#' @note The CpG names in the UCSC track are \emph{not} unique, they are 
+#' actually just \dQuote{\code{CpG: x}},
+#' where \code{x} is the \dQuote{\code{cpgNum}}.
+#' This function renames each CpG island to be unique.
+#' 
+#' @param f the path to a file
+#' @return a \code{data.frame} representation, in BED format,
+#' with the first 6 columns as per the BED format: 
+#' \url{http://genome.ucsc.edu/FAQ/FAQformat#format1}.\cr
+#' The score is from the
+#' \sQuote{obsExp}, the strand is always \dQuote{+}, and the names are CpG:1 to CpG:n,
+#' where n is the number of CpG islands
+#' @author Mark Cowley, 2012-03-05
+#' @export
+#' @examples
+#' \dontrun{
+#' 	hg17.bed <- ucsc.cpg2bed("UCSC/hg17.cpgIslandExt")
+#' }
+ucsc.cpg2bed <- function(f) {
+	tab <- read.delim(f)
+	colnames(tab)[1] <- sub("^X\\.", "", colnames(tab)[1])
+	
+	bed <- data.frame(
+		tab[,c("chrom", "chromStart", "chromEnd", "name", "obsExp")],
+		strand='+',
+		stringsAsFactors=FALSE
+	)
+	bed$name <- sprintf("CpG:%0d", 1:nrow(bed))
+	bed <- rename.column(bed, "obsExp", "score")
+	
+	bed
+}
+
+
+hg17.bed <- ucsc.cpg2bed("UCSC/hg17.cpgIslandExt")
+hg18.bed <- ucsc.cpg2bed("UCSC/hg18.cpgIslandExt")
+hg19.bed <- ucsc.cpg2bed("UCSC/hg19.cpgIslandExt")
+mm9.bed <- ucsc.cpg2bed("UCSC/mm9.cpgIslandExt")
+mm8.bed <- ucsc.cpg2bed("UCSC/mm8.cpgIslandExt")
+rn4.bed <- ucsc.cpg2bed("UCSC/rn4.cpgIslandExt")
+
+require(ChIPpeakAnno) || stop("required package 'ChIPpeakAnno' is not installed")
+
+bed2rd <- function(bed) {
+	res <- BED2RangedData(bed, FALSE)
+	res$description <- sprintf("CpG island %d [Source:UCSC]", 1:nrow(bed))
+	res
+}
+CpG.human.GRCh37 <- bed2rd(hg19.bed)
+CpG.human.NCBI36 <- bed2rd(hg18.bed)
+CpG.human.NCBI35 <- bed2rd(hg17.bed)
+CpG.mouse.NCBI37 <- bed2rd(mm9.bed)
+CpG.mouse.NCBI36 <- bed2rd(mm8.bed)
+CpG.rat.RGSC3.4  <- bed2rd(rn4.bed)
+
+for(dat in ls(pattern="^CpG")) {
+	save(list=dat, file=sprintf("~/src/R/macsR/data/%s.rda", dat), compress="xz")
+}
+
+# save(list=ls(pattern="^CpG"), file="~/src/R/macsR/data/myData.RData")
