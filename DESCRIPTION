@@ -1,8 +1,8 @@
 Package: macsR
 Type: Package
 Title: Facilitate analysis of MACS results.
-Version: 1.0
-Date: 2012-03-05
+Version: 1.1
+Date: 2012-03-12
 Author: Mark Cowley
 Maintainer: Mark Cowley <m.cowley@garvan.org.au>
 Description: MACS (model based analysis for ChIP-Seq) is a popular program for
@@ -17,7 +17,7 @@ Depends:
     plyr,
     ChIPpeakAnno,
     AnnotationDbi,
-    xlsx
+    excelIO
 Imports:
     ChIPpeakAnno,
     IRanges
@@ -33,16 +33,10 @@ Collate:
     'macsR-package.R'
     'CpG-data.R'
     'get.full.path.R'
-    'is.dir.R'
-    'is.matrix.like.R'
-    'is.tsv.file.R'
-    'is.xls.file.R'
     'mget.chain.R'
     'move.column.R'
     'rename.column.R'
-    'write.delim.R'
-    'writeLines.xls.R'
     'mget2.R'
     'na.rm.R'
     'annotatePeakInBatch.examples.R'
-    'read.xls.R'
+    'is.macs.fixed.R'
