@@ -35,7 +35,6 @@ import.macs.peaks.file <- function(peaks.file) {
 	length(peaks.file) == 1 && file.exists(peaks.file) || stop("peaks.file must be the path to a single, valid file")
 	if( is.excel.file(peaks.file) ) {
 		peaks <- read.xls(peaks.file, check.names=FALSE)
-		# peaks <- read.xlsx(peaks.file, 1, check.names=FALSE)
 		if( any(grepl("ARGUMENTS LIST:", peaks[,1])) ) {
 			skip <- which(peaks[,1] == "name")
 			peaks <- read.xls(peaks.file, skip=skip, check.names=FALSE)
@@ -64,3 +63,4 @@ import.macs.peaks.file <- function(peaks.file) {
 }
 # CHANGELOG
 # 2012-03-08: moved from read.xls -> xlsx::read.xlsx
+# 2012-03-12: moved from xlsx::read.xlsx -> excelIO::read.xls

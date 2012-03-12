@@ -66,7 +66,7 @@ annotate.macs.output <- function(dir, genome=c("hg19", "hg18", "mm9", "rn4"), ts
 	macs.peaks.file <- grep("_negative_peaks.xls", macs.peaks.file, invert=TRUE, value=TRUE)
 	(length(macs.peaks.file) == 1) || stop("macs.peaks.file must exist")
 
-	peaks.annot.file <- sub("_peaks.xls", "_peaks_annot.xlsx", macs.peaks.file)
+	peaks.annot.file <- sub("_peaks.xls", "_peaks_annot.xls", macs.peaks.file)
 	################################################################################
 	
 	################################################################################
@@ -138,7 +138,7 @@ annotate.macs.output <- function(dir, genome=c("hg19", "hg18", "mm9", "rn4"), ts
 	# custom.RangedData <- BED2RangedData(custom.bed, FALSE)
 	################################################################################
 	
-	message("Writing xlsx to: ", peaks.annot.file, "...")
-	write.xlsx(peaks.annot, peaks.annot.file, row.names=FALSE)	
+	message("Writing xls to: ", peaks.annot.file, "...")
+	write.xls(peaks.annot, peaks.annot.file, row.names=FALSE)	
 	message("done")
 }
