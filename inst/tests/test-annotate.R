@@ -19,11 +19,11 @@ test_that("annotation on a 'fixed' MACS dir works", {
 	file.copy(dir(input, full=TRUE), testdir)
 	expect_that(
 		peaks.annot <- annotate.macs.output(testdir),
-		shows_message("Writing xlsx to")
+		shows_message("Writing xls to")
 	)
 	expect_that(length(dir(testdir)), equals(13))
-	expect_true(file.exists(file.path(testdir,"FoxA1.vs.input.MCF7_peaks_annot.xlsx")))
-	expect_true(is.excel.file(file.path(testdir,"FoxA1.vs.input.MCF7_peaks_annot.xlsx")))
+	expect_true(file.exists(file.path(testdir,"FoxA1.vs.input.MCF7_peaks_annot.xls")))
+	expect_true(is.excel.file(file.path(testdir,"FoxA1.vs.input.MCF7_peaks_annot.xls")))
 	
 	unlink(testdir)
 })
