@@ -18,7 +18,8 @@ usage()
 cat << EOF
 usage: $0 options
 
-This script runs macs14, then fixes the output, and annotates to TSS and CpG islands.
+This script runs macs14, writes the results into the current working directory,
+then fixes the output, and annotates to TSS and CpG islands.
 It only provides a subset of the macs14 options, for running in single sample mode,
 or 2 sample mode. 
 
@@ -44,7 +45,10 @@ OPTIONS:
 EOF
 }
 
-if [ $@ -eq 0 ]; then 
+# Require macs14
+hash macs14 2>/dev/null || { echo >&2 "I require macs14 but it's not installed.  Aborting."; exit 1; }
+
+if [ $# -eq 0 ]; then 
   usage
   exit 1
 fi
@@ -52,8 +56,10 @@ fi
 while getopts "t:c:n:f:g:h" option
 do
      case "${option}" in
-          t) treatment="-t ${OPTARG}";;
-          c) control="-c ${OPTARG})";;
+          t) [ -f "${OPTARG}" ] || { echo >&2 "-t file doesn't exist. Aborting"; exit 1; }
+             treatment="-t ${OPTARG}";;
+          c) [ -f "${OPTARG}" ] || { echo >&2 "-c file doesn't exist. Aborting"; exit 1; }
+		     control="-c ${OPTARG}";;
           n) name="-n ${OPTARG}";;
           f) format="-f ${OPTARG}";;
           g) genome="-g ${OPTARG}";;
@@ -63,14 +69,20 @@ do
              exit 1;;
      esac
 done
-# update $@ to not include any of these options.
+# update $# to not include any of these options.
 shift $(($OPTIND - 1)) 
 
-echo "Running macs14"
-macs14 $treatment $control $name $genome --diag 2>&1
+if [ $# -ne 0 ]; then 
+  echo "You have supplied additional parameters"
+  usage
+  exit 1
+fi
+
+echo "Running macs14 in `pwd`"
+macs14 $treatment $control $name $format $genome --diag 2>&1 || { echo >&2 "macs14 failed. Aborting"; exit 2; }
 
 echo "Fixing results"
-Rscript --vanilla --default-packages=pwbc -e 'fix.macs.output(".")'
-
+Rscript --vanilla -e 'suppressPackageStartupMessages(library(macsR)); fix.macs.output(getwd(), fdr.thresh=c(5,10,15,25))' || { echo >&2 "fix.macs.output failed. Aborting"; exit 2; }
+	
 echo "Annotating results"
-Rscript --vanilla --default-packages=pwbc -e 'macs.ChIPpeakAnno(".")'
+Rscript --vanilla -e 'suppressPackageStartupMessages(library(macsR)); annotate.macs.output(getwd(), "hg19", tss=TRUE, cpg=TRUE)' || { echo >&2 "annotate.macs.output failed. Aborting"; exit 2; }
