@@ -18,14 +18,20 @@
 #' CpG-island definitions, the former are from Ensembl, and the latter are from
 #' UCSC.
 #' 
-#' \tabular{ll}{ 
-#' Package: \tab macsR\cr
-#' Type: \tab Package\cr
-#' Version: \tab 1.0\cr
-#' Date: \tab 2012-03-05\cr
-#' License: \tab GPL2\cr
-#' LazyLoad: \tab yes\cr
-#' }
+#' @section MACS version:
+#' This package expects macs14 to be installed.
+#' 
+#' @section MACS installation on OSX 10.7.3:\cr
+#' Download the tar.gz: \url{https://github.com/downloads/taoliu/MACS/MACS-1.4.1.tar.gz}\cr
+#' unpack & install to home dir:\cr
+#' \code{$ python setup.py install --user}\cr
+#' copy binaries from \code{./bin} to \code{~/bin/macs14} & make executable\cr
+#' Edit \code{$HOME/.bashrc} file:\cr
+#' \code{export PATH=$PATH:~/bin/macs14}\cr
+#' \code{export PYTHONPATH=~/Library/Python/2.7/lib/python/site-packages:$PYTHONPATH}
+#' 
+#' @section MACS installation on Ubuntu:
+#' Download & install the Debian package: \url{http://liulab.dfci.harvard.edu/MACS/Download.html}
 #' 
 #' @name macsR-package
 #' @aliases macsR macsR-package
