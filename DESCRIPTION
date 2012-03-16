@@ -2,7 +2,7 @@ Package: macsR
 Type: Package
 Title: Facilitate analysis of MACS results.
 Version: 1.1
-Date: 2012-03-12
+Date: 2012-03-16
 Author: Mark Cowley
 Maintainer: Mark Cowley <m.cowley@garvan.org.au>
 Description: MACS (model based analysis for ChIP-Seq) is a popular program for
