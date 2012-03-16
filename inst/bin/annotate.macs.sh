@@ -17,7 +17,7 @@ OPTIONS:
 EOF
 }
 
-if [ "$#" -eq "0" ]; then 
+if [ $# -eq 0 ]; then 
   usage
   exit 1
 fi
@@ -43,5 +43,5 @@ fi
 
 cd "$dir"
 echo "Annotating MACS results in `pwd`"
-Rscript --vanilla --default-packages=macsR -e 'annotate.macs.output(getwd(), "hg19", tss=TRUE, cpg=TRUE)'
+Rscript --vanilla -e 'suppressPackageStartupMessages(library(macsR)); annotate.macs.output(getwd(), "hg19", tss=TRUE, cpg=TRUE)'
 cd -
