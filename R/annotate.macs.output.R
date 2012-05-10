@@ -22,14 +22,14 @@
 #' \item{strand}{1 or + for positive strand and -1 or - for negative strand
 #'           where the feature is located}
 #' \item{insideFeature}{One of these keywords:\cr
-#' \begin{itemize}
+#' \describe{
 #'    \item{upstream}{peak resides upstream of the feature}
 #'    \item{downstream}{peak resides downstream of the feature}
 #'    \item{inside}{peak resides inside the feature}
 #'    \item{overlapStart}{peak overlaps with the start of the feature} 
 #'    \item{overlapEnd}{peak overlaps with the end of the feature} 
 #'    \item{includeFeature}{peak include the feature entirely}
-#' \end{itemize}
+#' }
 #' }
 #' \item{distancetoFeature}{distance to the nearest feature.
 #'   By default, the distance is

@@ -29,21 +29,21 @@
   \item{end_position}{end position of the feature: TSS or
   CpG} \item{strand}{1 or + for positive strand and -1 or -
   for negative strand where the feature is located}
-  \item{insideFeature}{One of these keywords:\cr
-  \begin{itemize} \item{upstream}{peak resides upstream of
-  the feature} \item{downstream}{peak resides downstream of
-  the feature} \item{inside}{peak resides inside the
-  feature} \item{overlapStart}{peak overlaps with the start
-  of the feature} \item{overlapEnd}{peak overlaps with the
-  end of the feature} \item{includeFeature}{peak include
-  the feature entirely} \end{itemize} }
-  \item{distancetoFeature}{distance to the nearest feature.
-  By default, the distance is calculated as the distance
-  between the start of the binding site and the TSS that is
-  the gene start for genes located on the forward strand
-  and the gene end for genes located on the reverse
-  strand.} \item{shortestDistance}{The shortest distance
-  from either end of peak to either end the feature}
+  \item{insideFeature}{One of these keywords:\cr \describe{
+  \item{upstream}{peak resides upstream of the feature}
+  \item{downstream}{peak resides downstream of the feature}
+  \item{inside}{peak resides inside the feature}
+  \item{overlapStart}{peak overlaps with the start of the
+  feature} \item{overlapEnd}{peak overlaps with the end of
+  the feature} \item{includeFeature}{peak include the
+  feature entirely} } } \item{distancetoFeature}{distance
+  to the nearest feature.  By default, the distance is
+  calculated as the distance between the start of the
+  binding site and the TSS that is the gene start for genes
+  located on the forward strand and the gene end for genes
+  located on the reverse strand.}
+  \item{shortestDistance}{The shortest distance from either
+  end of peak to either end the feature}
   \item{fromOverlappingOrNearest}{One of these keywords:\cr
   \emph{NearestStart}: indicates this feature's start
   (feature's end for features at minus strand) is closest
