@@ -1,8 +1,8 @@
 Package: macsR
 Type: Package
 Title: Facilitate analysis of MACS results.
-Version: 1.1
-Date: 2012-03-16
+Version: 1.2
+Date: 2012-03-29
 Author: Mark Cowley
 Maintainer: Mark Cowley <m.cowley@garvan.org.au>
 Description: MACS (model based analysis for ChIP-Seq) is a popular program for
@@ -12,6 +12,9 @@ Description: MACS (model based analysis for ChIP-Seq) is a popular program for
     with their nearest TSS and CpG island.
 License: GPL-2
 LazyLoad: yes
+LazyData: yes
+ZipData: no
+OS_type: unix
 Depends:
     R (>= 2.13.1),
     plyr,
