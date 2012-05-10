@@ -27,12 +27,30 @@
   definitions, the former are from Ensembl, and the latter
   are from UCSC.
 }
+\section{macsR from the commandline}{
+  I've included a few shell scripts inside the \code{bin}
+  directory, which can help run this code in offline mode.
+  You can add this to your PATH, eg on OSX:
+  PATH=$PATH:/Library/Frameworks/R.framework/Resources/library/macsR/bin\cr
+  \code{do.macs.sh}: run MACS on 1 or 2 input bam files,
+  fix the output & annotate the peaks with nearest TSS and
+  CpG island. Note there are only a subset of the macs14
+  options available.\cr \code{fix.macs.sh}: fix/improve the
+  look of MACS results.\cr \code{annotate.macs.sh}:
+  annotated MACS results with neares TSS and CpG islands.
+  Note I always run this after running \code{fix.macs.sh}.
+  I plan to allow you to add additional BED files for
+  annotating peaks, though \code{bedtools} may be a better
+  way to do this.
+}
+
 \section{MACS version}{
-  This package expects macs14 to be installed.
+  This package does not include macs, but it does expect
+  macs14 to be installed & on your path.
 }
 
 \section{MACS installation on OSX 10.7.3}{
-  \cr Download the tar.gz:
+  Download the tar.gz:
   \url{https://github.com/downloads/taoliu/MACS/MACS-1.4.1.tar.gz}\cr
   unpack & install to home dir:\cr \code{$ python setup.py
   install --user}\cr copy binaries from \code{./bin} to
