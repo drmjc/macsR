@@ -2,13 +2,15 @@
 # Fix a MACS output file.
 # 
 # usage:
+# fix.macs.sh -?
+# fix.macs.sh /path/to/macs/results
 #
 # Mark Cowley, 2012-03-13
 
 usage()
 {
 cat << EOF
-usage: $0 options
+usage: $0 options /path/to/macs/results
 
 This script takes a MACS result directory & annotates the peaks with nearest TSS and CpG islands.
 

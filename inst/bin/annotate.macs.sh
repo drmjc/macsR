@@ -1,7 +1,9 @@
 #!/bin/bash
-# Annotate a MACS output file.
+# Annotate a MACS output directory.
 # 
-# usage:
+# usage: 
+# annotate.macs.sh
+# annotate.macs.sh /path/to/macs/results
 #
 # Mark Cowley, 2012-03-08
 

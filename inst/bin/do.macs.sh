@@ -1,5 +1,7 @@
 #!/bin/bash
 # Run MACS, fix the output & annotate the peaks with nearest TSS and CpG island
+# Note, currently there's only a small subset of the macs14 options available,
+# & it's really only been tested on hg19 with BAM file(s)
 # 
 # usage:
 # do.macs.sh -?
