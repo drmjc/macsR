@@ -91,13 +91,13 @@ annotate.macs.output <- function(dir, genome=c("hg19", "hg18", "mm9", "rn4"), ts
 	################################################################################
 	# setup the input/output file paths
 	# bed.file <- "TAMR.vs.MCF7.MBD2_peaks.bed"
-	bed.file <- dir(dir, pattern="_peaks.bed", full=TRUE)
+	bed.file <- dir(dir, pattern="_peaks.bed", full.names=TRUE)
 	bed.file <- grep("_negative_peaks.bed", bed.file, invert=TRUE, value=TRUE)
 	cat("peaks file:", bed.file, "\n")
 	(length(bed.file) == 1) || stop("bed.file must exist")
 
 	# macs.peaks.file <- "TAMR.vs.MCF7.MBD2_peaks.xls"
-	macs.peaks.file <- dir(dir, pattern="_peaks.xls", full=TRUE)
+	macs.peaks.file <- dir(dir, pattern="_peaks.xls", full.names=TRUE)
 	macs.peaks.file <- grep("_negative_peaks.xls", macs.peaks.file, invert=TRUE, value=TRUE)
 	(length(macs.peaks.file) == 1) || stop("macs.peaks.file must exist")
 

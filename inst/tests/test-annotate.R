@@ -16,7 +16,7 @@ test_that("annotation on a 'fixed' MACS dir works", {
 	dir.create(testdir)
 	# message("testing annotation in", dir)
 	
-	file.copy(dir(input, full=TRUE), testdir)
+	file.copy(dir(input, full.names=TRUE), testdir)
 	expect_that(
 		peaks.annot <- annotate.macs.output(testdir),
 		shows_message("Writing xls to")

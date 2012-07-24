@@ -14,7 +14,7 @@ test_that("fix.macs.output testing", {
 	testdir <- tempfile("fix.macs")
 	dir.create(testdir)
 	# cat("testdir:", testdir, "\n")
-	file.copy(dir(input, full=T), testdir)
+	file.copy(dir(input, full.names=TRUE), testdir)
 	
 	expect_that(
 		peaks <- fix.macs.output(testdir),

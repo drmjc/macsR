@@ -7,7 +7,7 @@
 is.macs.fixed <- function(dir) {
 	!missing(dir) && is.dir(dir) || stop("dir must exist & should contain MACS result files")
 	
-	peaks.files <- dir(dir, pattern="_peaks.xls$", full=TRUE)
+	peaks.files <- dir(dir, pattern="_peaks.xls$", full.names=TRUE)
 	(length(peaks.files) %in% c(1,2)) && all(file.exists(peaks.files)) || stop("there must be 1 or 2 peaks files within the dir")
 
 	peaks.file <- grep("negative", peaks.files, invert=TRUE, value=TRUE)
