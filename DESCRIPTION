@@ -1,29 +1,34 @@
 Package: macsR
 Type: Package
 Title: Facilitate analysis of MACS results.
-Version: 1.2
-Date: 2012-03-29
+Version: 1.2.0
+Date: 2012-10-29
 Author: Mark Cowley
 Maintainer: Mark Cowley <m.cowley@garvan.org.au>
-Description: MACS (model based analysis for ChIP-Seq) is a popular program for
-    converting ChIP-Seq reads into peaks. If produces a number of output files
-    in a directory, which to my mind can be improved a little. This package
-    imports these results, can improve the result files, and can annotate peaks
-    with their nearest TSS and CpG island.
+Description: MACS (model based analysis for ChIP-Seq) is a
+    popular program for converting ChIP-Seq reads into
+    peaks. If produces a number of output files in a
+    directory, which to my mind can be improved a little.
+    This package imports these results, can improve the
+    result files, and can annotate peaks with their nearest
+    TSS and CpG island.
 License: GPL-2
 LazyLoad: yes
 LazyData: yes
 ZipData: no
 OS_type: unix
 Depends:
-    R (>= 2.13.1),
+    R (>= 2.12.0),
     plyr,
     ChIPpeakAnno,
     AnnotationDbi,
-    excelIO
+    excelIO,
+    mjcbase
 Imports:
+    AnnotationDbi,
     ChIPpeakAnno,
-    IRanges
+    IRanges,
+    plyr
 Suggests:
     org.Hs.eg.db,
     org.Mm.eg.db,
@@ -35,11 +40,7 @@ Collate:
     'annotate.macs.output.R'
     'macsR-package.R'
     'CpG-data.R'
-    'get.full.path.R'
     'mget.chain.R'
-    'move.column.R'
-    'rename.column.R'
     'mget2.R'
-    'na.rm.R'
     'annotatePeakInBatch.examples.R'
     'is.macs.fixed.R'
