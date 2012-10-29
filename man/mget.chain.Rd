@@ -1,15 +1,6 @@
 \name{mget.chain}
 \alias{mget.chain}
-\title{Lookup keys in a chain of 2 environment or AnnDbBimap objects
-Sometimes you need to chain (or JOIN) a few mapping tables together
-in order to get the end result.
-For example, Using the annotation.db packages, if you need to go from
-GENESYMBOL to GENENAME, you have to go via the ENTREZGENE ID.
-You would lookup the entrez gene ID for
-each SYMBOL, using the org.Hs.egSYMBOL2EG AnnDbBimap,
-which can sometimes return \code{NA}'s. Then take
-those Entrez Gene ID's and look them up in the org.Hs.egGENENAME
-table. This function does the hard work for you.}
+\title{Lookup keys in a chain of 2 environment or AnnDbBimap objects}
 \usage{
   mget.chain(keys, a, b, debug = FALSE)
 }
@@ -33,15 +24,14 @@ table. This function does the hard work for you.}
   mapped value for a key, \code{NA} is returned.
 }
 \description{
-  Lookup keys in a chain of 2 environment or AnnDbBimap
-  objects Sometimes you need to chain (or JOIN) a few
-  mapping tables together in order to get the end result.
-  For example, Using the annotation.db packages, if you
-  need to go from GENESYMBOL to GENENAME, you have to go
-  via the ENTREZGENE ID. You would lookup the entrez gene
-  ID for each SYMBOL, using the org.Hs.egSYMBOL2EG
-  AnnDbBimap, which can sometimes return \code{NA}'s. Then
-  take those Entrez Gene ID's and look them up in the
+  Sometimes you need to chain (or JOIN) a few mapping
+  tables together in order to get the end result. For
+  example, Using the annotation.db packages, if you need to
+  go from GENESYMBOL to GENENAME, you have to go via the
+  ENTREZGENE ID. You would lookup the entrez gene ID for
+  each SYMBOL, using the org.Hs.egSYMBOL2EG AnnDbBimap,
+  which can sometimes return \code{NA}'s. Then take those
+  Entrez Gene ID's and look them up in the
   org.Hs.egGENENAME table. This function does the hard work
   for you.
 }
@@ -51,10 +41,11 @@ table. This function does the hard work for you.}
   defined in \code{\link{mget2}}.
 }
 \examples{
-require(org.Hs.eg.db)
-geneids <- c("TP53", "INS", "KRAS")
-mget.chain(geneids, org.Hs.egSYMBOL2EG, org.Hs.egGENENAME, FALSE)
-mget.chain(geneids, org.Hs.egSYMBOL2EG, org.Hs.egGENENAME, TRUE)
+if( require(org.Hs.eg.db) ) {
+  geneids <- c("TP53", "INS", "KRAS")
+  mget.chain(geneids, org.Hs.egSYMBOL2EG, org.Hs.egGENENAME, FALSE)
+  mget.chain(geneids, org.Hs.egSYMBOL2EG, org.Hs.egGENENAME, TRUE)
+}
 }
 \author{
   Mark Cowley, 2011-09-21

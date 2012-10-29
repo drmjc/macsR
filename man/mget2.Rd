@@ -37,10 +37,11 @@
   provide more sorting options to choose the newest.
 }
 \examples{
-require(org.Hs.eg.db)
-sym <- c("TP53", "INS", "EGFR", "MET", NA)
-mget2(sym, org.Hs.egSYMBOL2EG)
-mget2(sym, org.Hs.egSYMBOL2EG, na.rm=FALSE)
+if( require(org.Hs.eg.db) ) {
+  sym <- c("TP53", "INS", "EGFR", "MET", NA)
+  mget2(sym, org.Hs.egSYMBOL2EG)
+  mget2(sym, org.Hs.egSYMBOL2EG, na.rm=FALSE)
+}
 }
 \author{
   Mark Cowley, 2011-08-25
